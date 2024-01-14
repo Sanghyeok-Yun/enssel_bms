@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class Book {
 
     @Id
+    @Column(name = "book_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
