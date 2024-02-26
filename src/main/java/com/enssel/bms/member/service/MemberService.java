@@ -1,7 +1,7 @@
-package com.enssel.bms.service;
+package com.enssel.bms.member.service;
 
-import com.enssel.bms.entity.Member;
-import com.enssel.bms.repository.MemberRepository;
+import com.enssel.bms.member.entity.Member;
+import com.enssel.bms.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

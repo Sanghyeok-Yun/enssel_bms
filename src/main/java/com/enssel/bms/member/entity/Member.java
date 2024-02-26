@@ -1,7 +1,7 @@
-package com.enssel.bms.entity;
+package com.enssel.bms.member.entity;
 
-import com.enssel.bms.constant.Role;
-import com.enssel.bms.dto.MemberFormDto;
+import com.enssel.bms.security.constant.Role;
+import com.enssel.bms.member.dto.MemberFormDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

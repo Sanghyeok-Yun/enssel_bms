@@ -1,4 +1,4 @@
-package com.enssel.bms.constant;
+package com.enssel.bms.security.constant;
 
 public enum Role {
     USER, MANAGER, MASTER

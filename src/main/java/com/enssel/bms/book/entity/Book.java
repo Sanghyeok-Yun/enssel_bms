@@ -1,6 +1,6 @@
-package com.enssel.bms.entity;
+package com.enssel.bms.book.entity;
 
-import com.enssel.bms.constant.BookStatus;
+import com.enssel.bms.book.constant.BookStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

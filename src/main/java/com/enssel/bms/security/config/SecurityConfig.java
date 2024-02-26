@@ -1,4 +1,4 @@
-package com.enssel.bms.config.security;
+package com.enssel.bms.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

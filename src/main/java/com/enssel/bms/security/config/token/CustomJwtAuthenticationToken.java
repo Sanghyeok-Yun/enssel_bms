@@ -1,4 +1,4 @@
-package com.enssel.bms.config.security.token;
+package com.enssel.bms.security.config.token;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

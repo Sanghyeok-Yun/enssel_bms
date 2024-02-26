@@ -1,7 +1,8 @@
 package com.enssel.bms.service;
 
-import com.enssel.bms.dto.MemberFormDto;
-import com.enssel.bms.entity.Member;
+import com.enssel.bms.member.dto.MemberFormDto;
+import com.enssel.bms.member.entity.Member;
+import com.enssel.bms.member.service.MemberService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

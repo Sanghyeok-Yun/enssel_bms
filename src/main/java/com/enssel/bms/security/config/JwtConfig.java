@@ -1,8 +1,8 @@
-package com.enssel.bms.config.security;
+package com.enssel.bms.security.config;
 
-import com.enssel.bms.config.security.entryPoint.CustomEntryPoint;
-import com.enssel.bms.config.security.converter.SimpleJwtAuthenticationConverter;
-import com.enssel.bms.config.security.handler.CustomAccessDeniedHandler;
+import com.enssel.bms.security.config.entryPoint.CustomEntryPoint;
+import com.enssel.bms.security.config.converter.SimpleJwtAuthenticationConverter;
+import com.enssel.bms.security.config.handler.CustomAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

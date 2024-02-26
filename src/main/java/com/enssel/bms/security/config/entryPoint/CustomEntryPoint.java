@@ -1,4 +1,4 @@
-package com.enssel.bms.config.security.entryPoint;
+package com.enssel.bms.security.config.entryPoint;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

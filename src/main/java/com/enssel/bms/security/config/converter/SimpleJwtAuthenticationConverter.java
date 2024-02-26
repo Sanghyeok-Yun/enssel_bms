@@ -1,6 +1,6 @@
-package com.enssel.bms.config.security.converter;
+package com.enssel.bms.security.config.converter;
 
-import com.enssel.bms.config.security.token.CustomJwtAuthenticationToken;
+import com.enssel.bms.security.config.token.CustomJwtAuthenticationToken;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

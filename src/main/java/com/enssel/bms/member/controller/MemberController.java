@@ -1,11 +1,10 @@
-package com.enssel.bms.controller;
+package com.enssel.bms.member.controller;
 
-import com.enssel.bms.dto.MemberFormDto;
-import com.enssel.bms.entity.Member;
-import com.enssel.bms.service.MemberService;
+import com.enssel.bms.member.dto.MemberFormDto;
+import com.enssel.bms.member.entity.Member;
+import com.enssel.bms.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.Banner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

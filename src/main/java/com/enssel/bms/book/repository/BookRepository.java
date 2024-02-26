@@ -1,6 +1,6 @@
-package com.enssel.bms.repository;
+package com.enssel.bms.book.repository;
 
-import com.enssel.bms.entity.Book;
+import com.enssel.bms.book.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
