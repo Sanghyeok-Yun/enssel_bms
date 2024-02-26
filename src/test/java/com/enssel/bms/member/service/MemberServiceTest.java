@@ -1,4 +1,4 @@
-package com.enssel.bms.service;
+package com.enssel.bms.member.service;
 
 import com.enssel.bms.member.dto.MemberFormDto;
 import com.enssel.bms.member.entity.Member;

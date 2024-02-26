@@ -1,9 +1,9 @@
-package com.enssel.bms.repository;
+package com.enssel.bms.book.repository;
 
 import com.enssel.bms.book.constant.BookStatus;
 import com.enssel.bms.book.entity.Book;
 import com.enssel.bms.book.repository.BookRepository;
-import com.enssel.bms.entity.QBook;
+import com.enssel.bms.book.entity.QBook;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;

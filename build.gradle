@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.1'
 	id 'io.spring.dependency-management' version '1.1.4'
-	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+//	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com.enssel.bms'
@@ -51,16 +51,16 @@ tasks.named('test') {
 // 2. Gradle → Tasks → other → complieQuerydsl
 def querydslDir = "$buildDir/generated/querydsl"
 
-querydsl {
-	jpa = true
-	querydslSourcesDir = querydslDir
-}
+//querydsl {
+//	jpa = true
+//	querydslSourcesDir = querydslDir
+//}
 sourceSets {
 	main.java.srcDir querydslDir
 }
 configurations {
 	querydsl.extendsFrom compileClasspath
 }
-compileQuerydsl {
-	options.annotationProcessorPath = configurations.querydsl
-}
+//compileQuerydsl {
+//	options.annotationProcessorPath = configurations.querydsl
+//}
