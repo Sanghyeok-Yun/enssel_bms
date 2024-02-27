@@ -1,5 +1,6 @@
 package com.enssel.bms.member.controller;
 
+import com.enssel.bms.core.controller.AbstractController;
 import com.enssel.bms.member.dto.MemberFormDto;
 import com.enssel.bms.member.entity.Member;
 import com.enssel.bms.member.service.MemberService;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/members")
 @Controller
 @RequiredArgsConstructor
-public class MemberController {
+public class MemberController extends AbstractController {
 
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;

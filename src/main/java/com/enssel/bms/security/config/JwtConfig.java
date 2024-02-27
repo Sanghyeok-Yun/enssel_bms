@@ -14,14 +14,18 @@ import org.springframework.security.web.SecurityFilterChain;
 public class JwtConfig {
     @Bean
     public SecurityFilterChain jwtChain(HttpSecurity http, SimpleJwtAuthenticationConverter jwtAuthenticationConverter) throws Exception {
-        http.authorizeHttpRequests(
+        http
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+                .authorizeHttpRequests(
                         httpRequest ->
                                 //해당 url에 권한 부여
                                 httpRequest
-                                        .requestMatchers("/api/user/**").hasAnyAuthority("ROLE_admin")
-                                        .requestMatchers("/admin/**").hasAnyAuthority("ROLE_admin", "ROLE_manager")
-                                        .requestMatchers("/api/**").hasAnyAuthority("ROLE_user")
-                                        .anyRequest().permitAll()
+                                        .requestMatchers("/api/v1/members").hasAnyAuthority("ROLE_admin")
+                                        .requestMatchers("/api/v1/members/**").hasAnyAuthority("ROLE_admin")
+                                        .requestMatchers("/api/v1/admin").hasAnyAuthority("ROLE_admin", "ROLE_manager")
+                                        .requestMatchers("/api/v1/admin/**").hasAnyAuthority("ROLE_admin", "ROLE_manager")
+                                        .requestMatchers("/api/v1/bi/**").permitAll()
+                                        .requestMatchers("/error").permitAll()
                 )
                 .oauth2ResourceServer(
                         oauth2Request ->
