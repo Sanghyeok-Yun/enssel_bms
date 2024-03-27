@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -15,7 +16,7 @@ public class JwtConfig {
     @Bean
     public SecurityFilterChain jwtChain(HttpSecurity http, SimpleJwtAuthenticationConverter jwtAuthenticationConverter) throws Exception {
         http
-                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         httpRequest ->
                                 //해당 url에 권한 부여
@@ -26,6 +27,7 @@ public class JwtConfig {
                                         .requestMatchers("/api/v1/admin/**").hasAnyAuthority("ROLE_admin", "ROLE_manager")
                                         .requestMatchers("/api/v1/bi/**").permitAll()
                                         .requestMatchers("/error").permitAll()
+                                        .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(
                         oauth2Request ->
