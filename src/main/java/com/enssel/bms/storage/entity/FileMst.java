@@ -11,9 +11,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "FILE")
+@Table(name = "FILE_MST")
 @Data
-public class File {
+public class FileMst {
     @Id
     @Column(name="FILE_UUID")
     private String fileUuid;

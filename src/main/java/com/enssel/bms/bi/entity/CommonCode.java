@@ -31,8 +31,8 @@ public class CommonCode {
     @Column(name = "PARE_CODE")
     String pareCode;
 
-    @Column(name = "DESC")
-    String desc;
+    @Column(name = "DESCRIPTION")
+    String description;
 
     @Column(name = "SORT")
     int sort;

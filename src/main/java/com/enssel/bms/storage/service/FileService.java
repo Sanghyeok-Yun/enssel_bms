@@ -2,7 +2,7 @@ package com.enssel.bms.storage.service;
 
 import com.enssel.bms.storage.dto.FileRequest;
 import com.enssel.bms.storage.dto.FileRequestDetail;
-import com.enssel.bms.storage.entity.File;
+import com.enssel.bms.storage.entity.FileMst;
 import com.enssel.bms.storage.entity.FileDetail;
 import com.enssel.bms.storage.exception.FileException;
 import com.enssel.bms.storage.repository.FileDetailRepository;
@@ -103,14 +103,14 @@ public class FileService {
             String fileTypeCode = request.getParameter("fileTypeCode");
             boolean isNewFile = fileRepository.findById(fileUuid).isEmpty();
             if(isNewFile && !fileRequestDetails.isEmpty()){
-                File newFile = new File();
-                newFile.setFileUuid(fileUuid);
-                newFile.setFileTypeCode(fileTypeCode);
-                newFile.setUsedYn("Y");
-                newFile.setRegiId(principal.getName());
-                newFile.setUpdaId(principal.getName());
+                FileMst newFileMst = new FileMst();
+                newFileMst.setFileUuid(fileUuid);
+                newFileMst.setFileTypeCode(fileTypeCode);
+                newFileMst.setUsedYn("Y");
+                newFileMst.setRegiId(principal.getName());
+                newFileMst.setUpdaId(principal.getName());
 
-                fileRepository.save(newFile);
+                fileRepository.save(newFileMst);
             }
 
             // 새로 추가된 detail들 insert
@@ -138,12 +138,12 @@ public class FileService {
 
             // detail이 모두 삭제될 시 file도 삭제
             if(deleteFileList.size() - insertFileList.size() == nowDetails.size() && !isNewFile){
-                Optional<File> emptyFileOptional = fileRepository.findById(fileUuid);
+                Optional<FileMst> emptyFileOptional = fileRepository.findById(fileUuid);
                 if(emptyFileOptional.isPresent()){
-                    File emptyFile = emptyFileOptional.get();
-                    emptyFile.setUsedYn("N");
-                    emptyFile.setUpdaId(principal.getName());
-                    fileRepository.save(emptyFile);
+                    FileMst emptyFileMst = emptyFileOptional.get();
+                    emptyFileMst.setUsedYn("N");
+                    emptyFileMst.setUpdaId(principal.getName());
+                    fileRepository.save(emptyFileMst);
                 }
             }
         }
