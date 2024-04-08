@@ -9,14 +9,14 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="book")
+@Table(name="BOOK")
 @Getter
 @Setter
 @ToString
 public class Book {
 
     @Id
-    @Column(name = "book_id")
+    @Column(name = "BOOK_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

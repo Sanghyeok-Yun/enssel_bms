@@ -23,8 +23,8 @@ public class CommonCode {
     String code;
 
     @NotBlank
-    @Column(name = "NAME")
-    String name;
+    @Column(name = "CODE_NM")
+    String codeNm;
 
     @NotBlank
     @Pattern(regexp = "^[0-9]*$|-1", message = "pareCode는 숫자로 이루어진 문자열만 가능합니다.")
