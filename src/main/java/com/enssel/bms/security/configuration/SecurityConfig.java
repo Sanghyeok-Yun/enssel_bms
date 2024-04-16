@@ -1,8 +1,8 @@
-package com.enssel.bms.security.config;
+package com.enssel.bms.security.configuration;
 
-import com.enssel.bms.security.config.entryPoint.CustomEntryPoint;
-import com.enssel.bms.security.config.converter.SimpleJwtAuthenticationConverter;
-import com.enssel.bms.security.config.handler.CustomAccessDeniedHandler;
+import com.enssel.bms.security.configuration.entryPoint.CustomEntryPoint;
+import com.enssel.bms.security.configuration.converter.SimpleJwtAuthenticationConverter;
+import com.enssel.bms.security.configuration.handler.CustomAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,19 +12,22 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class JwtConfig {
+public class SecurityConfig {
+
     @Bean
-    public SecurityFilterChain jwtChain(HttpSecurity http, SimpleJwtAuthenticationConverter jwtAuthenticationConverter) throws Exception {
+    public SecurityFilterChain securityChain(HttpSecurity http, SimpleJwtAuthenticationConverter jwtAuthenticationConverter) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         httpRequest ->
                                 //해당 url에 권한 부여
                                 httpRequest
-                                        .requestMatchers("/api/v1/members").hasAnyAuthority("ROLE_admin")
-                                        .requestMatchers("/api/v1/members/**").hasAnyAuthority("ROLE_admin")
-                                        .requestMatchers("/api/v1/admin").hasAnyAuthority("ROLE_admin", "ROLE_manager")
-                                        .requestMatchers("/api/v1/admin/**").hasAnyAuthority("ROLE_admin", "ROLE_manager")
+//                                        .requestMatchers("/api/v1/user").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+//                                        .requestMatchers("/api/v1/user/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                                        .requestMatchers("/api/v1/user/**").permitAll()
+                                        .requestMatchers("/api/v1/user/code/**").permitAll()
+                                        .requestMatchers("/api/v1/admin").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
+                                        .requestMatchers("/api/v1/admin/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
                                         .requestMatchers("/api/v1/bi/**").permitAll()
                                         .requestMatchers("/error").permitAll()
                                         .anyRequest().permitAll()
@@ -34,10 +37,12 @@ public class JwtConfig {
                                 oauth2Request.accessDeniedHandler(new CustomAccessDeniedHandler())
                                         .authenticationEntryPoint(new CustomEntryPoint()).jwt(
                                                 jwtRequest ->
-                                                        jwtRequest.jwtAuthenticationConverter(jwtAuthenticationConverter)
+                                                        jwtRequest
+                                                                .jwtAuthenticationConverter(jwtAuthenticationConverter)
                                         )
                 );
 
         return http.build();
     }
+
 }

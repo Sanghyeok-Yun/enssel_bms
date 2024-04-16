@@ -1,8 +1,9 @@
 package com.enssel.bms.user.controller;
 
 import com.enssel.bms.core.controller.AbstractController;
+import com.enssel.bms.user.dto.ChangePasswordRequest;
 import com.enssel.bms.user.dto.UserRequest;
-import com.enssel.bms.user.entity.User;
+import com.enssel.bms.user.entity.UserInfo;
 import com.enssel.bms.user.service.UserService;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,12 +21,12 @@ public class UserController extends AbstractController {
     private final UserService userService;
 
     @GetMapping("/{userId}")
-    public User getUser(@PathVariable(name="userId") String userId){
+    public UserInfo getUser(@PathVariable(name="userId") String userId){
         return userService.getUser(userId);
     }
     
     @GetMapping("/table")
-    public List<User> getAllUser(){
+    public List<UserInfo> getAllUser(){
         return userService.getAllUser();
     }
 
@@ -40,8 +41,13 @@ public class UserController extends AbstractController {
     }
         
     @PostMapping
-    public User signUp(HttpServletRequest request, @Valid @RequestBody UserRequest userRequest){
+    public UserInfo signUp(HttpServletRequest request, @Valid @RequestBody UserRequest userRequest){
         return userService.signUp(request, userRequest);
+    }
+
+    @PutMapping("/password")
+    public void signUp(@Valid @RequestBody ChangePasswordRequest changePasswordRequest){
+        userService.changePassword(changePasswordRequest);
     }
 
 }

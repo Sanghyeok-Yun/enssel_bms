@@ -1,4 +1,4 @@
-package com.enssel.bms.security.config.handler;
+package com.enssel.bms.security.configuration.handler;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

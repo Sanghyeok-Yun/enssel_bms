@@ -12,14 +12,14 @@ import org.hibernate.validator.constraints.Length;
 public class UserRequest {
     /* 회원 가입 화면(가입정보) */
     @NotBlank(message = "id값은 필수 입력 값입니다.")
-    private String userId;
+    private String username;
 
     @NotBlank(message = "이름은 필수 입력 값입니다.")
-    private String userNm;
+    private String name;
 
     @NotEmpty(message = "비밀번호는 필수 입력 값입니다.")
-    @Length(max = 64, min = 64, message = "Client Application Error(password가 bcrypt로 hash되지 않았습니다).")
-    private String hashedPassword;
+    @Length(max = 32, min = 8, message = "비밀번호의 길이는 최소 8, 최대 32까지 가능합니다.")
+    private String password;
 
     @NotBlank(message = "인증코드는 필수 입력 값입니다.")
     private String passedCode;

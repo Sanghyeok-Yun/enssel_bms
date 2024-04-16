@@ -2,19 +2,22 @@ package com.enssel.bms.user.service;
 
 import com.enssel.bms.mail.dto.MailRequest;
 import com.enssel.bms.mail.service.MailService;
+import com.enssel.bms.user.dto.ChangePasswordRequest;
 import com.enssel.bms.user.dto.UserRequest;
-import com.enssel.bms.user.entity.User;
+import com.enssel.bms.user.entity.UserInfo;
 import com.enssel.bms.user.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
 import java.security.SecureRandom;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -23,14 +26,17 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final MailService mailService;
+    private final UserDetailsManager userDetailsManager;
+    private final PasswordEncoder passwordEncoder;
+
     private Map<String, String> signUpCodeMap = new HashMap<>();
     private Map<String, String> passedCodeMap = new HashMap<>();
     private char[] characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
 
-    public User getUser(String userId){
+    public UserInfo getUser(String userId){
         return userRepository.findById(userId).orElseThrow();
     }
-    public List<User> getAllUser(){
+    public List<UserInfo> getAllUser(){
         return userRepository.findAll();
     }
 
@@ -77,7 +83,7 @@ public class UserService {
         return sb.toString();
     }
 
-    public User signUp(HttpServletRequest request, UserRequest userRequest){
+    public UserInfo signUp(HttpServletRequest request, UserRequest userRequest){
         String addr = request.getRemoteAddr()+";"+request.getLocalAddr();
 
         if(isExistUser(userRequest)){
@@ -94,13 +100,29 @@ public class UserService {
             passedCodeMap.remove(addr);
         }
 
-        User user = new User();
-        user.updateByRequest(userRequest);
+        userDetailsManager.createUser(
+            User.builder()
+            .username(userRequest.getUsername())
+            .password(userRequest.getPassword())
+            .passwordEncoder(passwordEncoder::encode)
+            .roles("USER")
+            .build()
+        );
 
-        return userRepository.save(user);
+        UserInfo userInfo = new UserInfo();
+        userInfo.updateByRequest(userRequest);
+
+        return userRepository.save(userInfo);
     }
 
     private boolean isExistUser(UserRequest userRequest){
-        return userRepository.findById(userRequest.getUserId()).isPresent();
+        return userRepository.findById(userRequest.getUsername()).isPresent();
+    }
+
+    public void changePassword(ChangePasswordRequest changePasswordRequest){
+        userDetailsManager.changePassword(
+                changePasswordRequest.getOldPassword(),
+                changePasswordRequest.getNewPassword()
+        );
     }
 }

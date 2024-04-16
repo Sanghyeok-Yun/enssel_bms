@@ -1,7 +1,7 @@
 package com.enssel.bms.user.service;
 
 import com.enssel.bms.user.dto.UserRequest;
-import com.enssel.bms.user.entity.User;
+import com.enssel.bms.user.entity.UserInfo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class UserServiceTest {
+class UserInfoServiceTest {
 
     @Autowired
     UserService userService;
@@ -25,9 +25,9 @@ class UserServiceTest {
 
     public UserRequest createUserRequest() {
         UserRequest userRequest = new UserRequest();
-        userRequest.setUserNm("윤상혁");
-        userRequest.setUserId("shyoon");
-        userRequest.setHashedPassword(passwordEncoder.encode("1111"));
+        userRequest.setName("윤상혁");
+        userRequest.setUsername("shyoon");
+        userRequest.setPassword("1111");
 
         return userRequest;
     }
@@ -36,10 +36,10 @@ class UserServiceTest {
     @DisplayName("회원가입 테스트")
     public void saveUserTest(HttpServletRequest request){
         UserRequest user = createUserRequest();
-        User savedUser = userService.signUp(request, user);
-        System.out.println(savedUser.toString());
+        UserInfo savedUserInfo = userService.signUp(request, user);
+        System.out.println(savedUserInfo.toString());
 
-        Assertions.assertEquals(user.getUserId(), savedUser.getUserId());
+        Assertions.assertEquals(user.getUsername(), savedUserInfo.getUsername());
     }
 
     @Test
